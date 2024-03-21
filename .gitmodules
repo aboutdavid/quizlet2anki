@@ -1,0 +1,3 @@
+[submodule "quizlet-fetcher"]
+	path = quizlet-fetcher
+	url = https://github.com/aboutdavid/quizlet-fetcher/

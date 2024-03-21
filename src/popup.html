@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <style>
+      html {
+        font-family: system-ui, BlinkMacSystemFont, -apple-system, Segoe UI,
+          Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
+          Helvetica Neue, sans-serif;
+        color: #2d3748;
+        background: #fdfcfc;
+        min-width: 350px;
+        font-weight: 400;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Quizlet to Anki</h1>
+
+    <div id="results">Loading. Please wait.</div><br>
+    <button id="generate" disabled="true">Download</button>
+    <script src="/libs/file-saver.js"></script>
+    <script src="/libs/js-sha1.js"></script>
+    <script src="/libs/jszip.js"></script>
+    <script src="/libs/sql.js"></script>
+    <script src="/libs/apkg-export.js"></script>
+    <script src="/quizlet-fetcher/dist/parser.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>
