@@ -1,7 +1,7 @@
 {
   "name": "Quizlet to Anki",
   "description": "Turn your Quizlet flashcards into Anki decks",
-  "version": "0.0.0.1",
+  "version": "0.0.0.2",
   "manifest_version": 3,
   "action": {
     "default_popup": "src/popup.html",
