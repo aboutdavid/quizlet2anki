@@ -7,6 +7,8 @@ rsync -av --progress ./ ./dist --exclude node_modules
 rm -f ./dist/*.crx
 rm -f ./dist/*.pem
 rm -f ./dist.crx
+rm -f ./dist.zip
+zip -r dist.zip dist
 npx crx pack dist -o "$(pwd)/dist.crx"
 stat dist.crx
 echo "crx file ready at $(pwd)/dist.crx"

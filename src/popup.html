@@ -1,5 +1,8 @@
 <html>
   <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <style>
       html {
         font-family: system-ui, BlinkMacSystemFont, -apple-system, Segoe UI,
@@ -9,13 +12,25 @@
         background: #fdfcfc;
         min-width: 350px;
         font-weight: 400;
+        padding:1em;
+      }
+      button {
+        padding: 15px;
+        padding-right: 30px;
+        padding-left: 30px;
+        overflow: visible;
+      }
+      button {
+        font-family: inherit;
+        font-size: 1em;
       }
     </style>
   </head>
   <body>
     <h1>Quizlet to Anki</h1>
 
-    <div id="results">Loading. Please wait.</div><br>
+    <div id="results">Loading. Please wait.</div>
+    <br />
     <button id="generate" disabled="true">Download</button>
     <script src="/libs/mimes.js"></script>
     <script src="/libs/file-saver.js"></script>
