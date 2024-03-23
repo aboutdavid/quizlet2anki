@@ -1,0 +1,1 @@
+I don't do anything with your data. As of now, the extension does not even connect to any servers I own. It does fetch images from Quizlet, though. That's needed to download them from your sets, however.
