@@ -5,6 +5,8 @@
 A plain and simple web extension which can turn Quizlet sets into Anki decks.
 
 ## Screenshots
+![](assets/extension1.png)
+
 ![](assets/extension2.png)
 
 ## Known Issues

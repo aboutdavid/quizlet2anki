@@ -8,6 +8,10 @@ rm -f ./dist/*.crx
 rm -f ./dist/*.pem
 rm -f ./dist.crx
 rm -f ./dist.zip
+rm -rf ./dist/.git
+rm -f ./dist/*.sh
+rm -f ./dist/dist.zip
+rm -rf ./dist/dist
 zip -r dist.zip dist
 npx crx pack dist -o "$(pwd)/dist.crx"
 stat dist.crx
