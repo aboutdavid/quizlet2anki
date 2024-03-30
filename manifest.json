@@ -1,13 +1,13 @@
 {
   "name": "Quizlet to Anki",
   "description": "Turn your Quizlet flashcards into Anki decks",
-  "version": "0.0.0.3",
+  "version": "0.0.0.4",
   "manifest_version": 3,
   "action": {
     "default_popup": "src/popup.html",
     "default_icon": "assets/128.png"
   },
-  "permissions": ["activeTab"],
+  "permissions": ["activeTab", "downloads"],
   "icons": {
     "48": "assets/48.png",
     "128": "assets/128.png"

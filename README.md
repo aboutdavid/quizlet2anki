@@ -14,9 +14,12 @@ A plain and simple web extension which can turn Quizlet sets into Anki decks.
 - None yet.
 
 ## Supported Browsers
+- Firefox (Desktop)
 - Google Chrome
 - Microsoft Edge
-- Firefox
+- Opera
+
+Google Chrome, Microsoft Edge and Opera should use the [Chrome Web Store](https://chromewebstore.google.com/detail/quizlet-to-anki/cgeebapijlelpceccbapfkpoaolbiccm) listing to download it.
 
 ## License
 
