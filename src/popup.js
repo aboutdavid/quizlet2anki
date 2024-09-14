@@ -42,15 +42,17 @@ async function makeCards() {
             apkg.save()
                 .then(zip => {
                     document.querySelector("#status").innerText = "Saving..."
-                    if (!navigator.userAgent.toLowerCase().includes("chrome")){
-                        var url = URL.createObjectURL(zip)
-                        chrome.downloads.download({
-                            url, filename: `${window.slugify(window.cardSet.title)}.apkg`, saveAs: true
-                        });
-                    } else {
-                        saveAs(`${window.slugify(window.cardSet.title)}.apkg`, zip) // Chrome has an annoying mime detection check.
-                    }
-                    
+
+                    var uri = URL.createObjectURL(zip)
+                    var name = `${window.slugify(window.cardSet.title)}.apkg`
+                    var link = document.createElement("a");
+
+                    link.setAttribute('download', name);
+                    link.href = uri;
+                    document.body.appendChild(link);
+                    link.click();
+                    link.remove();
+
                     document.querySelector("#status").innerText = "Saved. Check the downloads section of your browser."
                     document.getElementById("generate").innerText = "✅ Saved"
                     setTimeout(function () { document.getElementById("generate").innerText = "Download" }, 3000)
