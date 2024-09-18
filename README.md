@@ -1,14 +1,14 @@
 # quizlet2anki
 
-<a href="https://addons.mozilla.org/en-US/firefox/addon/quizlet-to-anki/"><img src="assets/get-the-addon.png"></a>
-<a href="https://chromewebstore.google.com/detail/quizlet-to-anki/cgeebapijlelpceccbapfkpoaolbiccm"><img src="assets/chrome-web.png"></a>
+<a href="https://addons.mozilla.org/en-US/firefox/addon/quizlet-to-anki/"><img src="public/assets/get-the-addon.png"></a>
+<a href="https://chromewebstore.google.com/detail/quizlet-to-anki/cgeebapijlelpceccbapfkpoaolbiccm"><img src="public/assets/chrome-web.png"></a>
 
 A plain and simple web extension which can turn Quizlet sets into Anki decks.
 
 ## Screenshots
-![](assets/extension1.png)
+![](public/assets/extension1.png)
 
-![](assets/extension2.png)
+![](public/assets/extension2.png)
 
 ## Known Issues
 - None yet.

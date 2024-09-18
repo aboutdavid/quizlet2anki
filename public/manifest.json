@@ -4,7 +4,7 @@
   "version": "0.0.0.5",
   "manifest_version": 3,
   "action": {
-    "default_popup": "src/popup.html",
+    "default_popup": "index.html",
     "default_icon": "assets/128.png"
   },
   "permissions": ["activeTab"],
@@ -15,7 +15,7 @@
   "content_scripts": [
     {
       "matches": ["*://quizlet.com/*"],
-      "js": ["src/content.js"],
+      "js": ["content.js"],
       "run_at": "document_end"
     }
   ],
@@ -23,5 +23,8 @@
     "gecko": {
       "id": "quizlet2anki@crx.aboutdavid.me"
     }
+  },
+  "content_security_policy": {
+	"extension_pages": "script-src 'self' 'wasm-unsafe-eval'"
   }
 }
