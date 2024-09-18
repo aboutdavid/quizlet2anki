@@ -1,3 +1,22 @@
+import QuizletFetcher from "quizlet-fetcher"
+import slugify from "slugify"
+import Exporter from "../libs/apkg-export.js"
+
+const mimes = {
+	'image/jpeg': '.jpg',
+	'image/png': '.png',
+	'image/gif': '.gif',
+	'image/bmp': '.bmp',
+	'image/webp': '.webp',
+	'image/svg+xml': '.svg',
+	'audio/mpeg': '.mp3',
+	'audio/wav': '.wav',
+	'audio/ogg': '.ogg',
+	'audio/midi': '.mid'
+}
+
+let cardSet = null
+
 async function main() {
     try {
         const [tab] = await chrome.tabs.query({ active: true, lastFocusedWindow: true });
@@ -5,11 +24,11 @@ async function main() {
 
         if (response.error) return document.querySelector("#results").innerText = response.error
 
-        var quizlet = new window.QuizletFetcher(response.html).getJSON()
+        var quizlet = new QuizletFetcher(response.html).getJSON()
         quizlet.title = quizlet.title.replace("Back ButtonSearch IconFilter Icon", "") // Hotfix for Chromium based browsers
         document.querySelector("#results").innerText = `${quizlet.title}\n\nAuthor: ${quizlet.author}\n\nDescription: ${quizlet.description || "No description found."}\n\n${quizlet.cards.length} card(s) found with ${quizlet.cards.filter(a => a.image).length} image(s)`
         document.querySelector("#status").innerText = "Status: Ready"
-        window.cardSet = quizlet
+        cardSet = quizlet
         document.getElementById("generate").disabled = false
     } catch (e) {
         console.error(e)
@@ -22,15 +41,15 @@ document.getElementById("generate").addEventListener("click", makeCards);
 
 async function makeCards() {
     document.querySelector("#status").innerText = "Generating."
-    const apkg = new window.apkgExport(window.cardSet.title)
-    let promises = window.cardSet.cards.map(async (card, i) => {
+    const apkg = new Exporter(cardSet.title)
+    let promises = cardSet.cards.map(async (card, i) => {
         const id = Math.random().toString(32).slice(2)
 
         if (card.image) {
-            document.querySelector("#status").innerText = `Status: Downloading image ${i}/${window.cardSet.cards.length}`
+            document.querySelector("#status").innerText = `Status: Downloading image ${i}/${cardSet.cards.length}`
             const img = await (await fetch(card.image.replace(/^https:\/\/.*?\/(https?:\/\/.*)$/, "$1"))).blob()
             var filename = id
-            window.mimes[img] ? filename = filename + window.mimes[img] : null
+            mimes[img] ? filename = filename + mimes[img] : null
             apkg.addMedia(filename, img)
             console.log(apkg.media)
         }
@@ -44,7 +63,7 @@ async function makeCards() {
                     document.querySelector("#status").innerText = "Saving..."
 
                     var uri = URL.createObjectURL(zip)
-                    var name = `${window.slugify(window.cardSet.title)}.apkg`
+                    var name = `${slugify(cardSet.title)}.apkg`
                     var link = document.createElement("a");
 
                     link.setAttribute('download', name);

@@ -2,7 +2,17 @@
 Extremely hard fork of npm.im/anki-apkg-export
 This file is licensed under the MIT.
 */
-window.getLastItem = obj => {
+
+import { sha1 } from 'js-sha1';
+import JSZip from "jszip";
+import initSqlJs from 'sql.js';
+import sqliteUrl from "sql.js/dist/sql-wasm.wasm?url"
+
+const SQL = await initSqlJs({
+  locateFile: file => sqliteUrl
+});
+
+const getLastItem = obj => {
     const keys = Object.keys(obj);
     const lastKey = keys[keys.length - 1];
   
@@ -12,11 +22,7 @@ window.getLastItem = obj => {
     return item;
   };
   
-  window.createTemplate = function ({
-    questionFormat = '{{Front}}',
-    answerFormat = '{{FrontSide}}\n\n<hr id="answer">\n\n{{Back}}',
-    css = '.card {\n font-family: arial;\n font-size: 20px;\n text-align: center;\n color: black;\nbackground-color: white;\n}\n'
-  } = {}) {
+ function createTemplate({ questionFormat, answerFormat, css }) {
     const conf = {
         nextPos: 1,
         estTimes: true,
@@ -251,11 +257,18 @@ window.getLastItem = obj => {
     `;
   }
   
-  window.Exporter = class {
-    constructor(deckName, { template }) {
+  export default class Exporter {
+    constructor(deckName) {
         console.log(deckName)
         this.db = new SQL.Database();
-        this.db.run(template);
+		
+		const templateOpts = {
+			questionFormat: '{{Front}}',
+			answerFormat: '{{FrontSide}}\n\n<hr id="answer">\n\n{{Back}}',
+			css: '.card {\n font-family: arial;\n font-size: 20px;\n text-align: center;\n color: black;\nbackground-color: white;\n}\n'
+		 }
+
+        this.db.run(createTemplate(templateOpts));
   
         const now = Date.now();
         const topDeckId = this._getId('cards', 'did', now);
@@ -401,12 +414,4 @@ window.getLastItem = obj => {
   
         return rowObj.id || this._getId('cards', 'id', ts);
     }
-  }
-  
-  
-  
-  window.apkgExport = function (deckName, template) {
-    return new window.Exporter(deckName, {
-        template: createTemplate(template)
-    });
   }
